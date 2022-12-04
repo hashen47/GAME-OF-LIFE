@@ -8,7 +8,37 @@
     <title>Game Of Life</title>
 </head>
 <body>
-    
+    <main>
+        <section class="top">
+            <div>
+                <span>GENERATION</span>
+                <input type="text" name="generation" value="0" id="generation">
+            </div>
+            <div>
+                <span>CELL SIZE</span>
+                <select id="cellsize">
+                    <option value="2">2</option>
+                    <option selected value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="canvas-section">
+            <canvas id="canvas"></canvas>
+        </section>
+
+        <section class="bottom">
+            <button id="random">Random</button>
+            <button id="1x">1X</button>
+            <button id="10x">10X</button>
+            <button id="100x">100X</button>
+            <button id="1000x">1000X</button>
+            <button id="play">play</button>
+        </section>
+    </main>
 </body>
-<script defer src="./index.js"></script>
+<script defer tyep="module" src="./index.js"></script>
 </html>
