@@ -21,6 +21,7 @@ class Main{
 
         this.#set(); // set canvas width, height, rows, cols, fill grid
         this.#reset(); // reset everything when resize the window or change the cellsize
+        this.#randomGrid(); // when press the random button make a new grid every time it pressed
     }
 
 
@@ -70,6 +71,13 @@ class Main{
 
             this.grid.push(row);
         }
+    }
+
+
+    #randomGrid(){
+        document.getElementById("random").addEventListener("click", () => {
+            this.#fillGrid();
+        })
     }
 
 
