@@ -4,6 +4,7 @@ class Main{
     #mesh_color;
     #cell_color;
     #generation;
+    #play;
 
 
     constructor(){
@@ -12,6 +13,7 @@ class Main{
         this.ctx = this.canvas.getContext("2d");
 
         // grid and cells
+        this.#play = false;
         this.#generation = 0;
         this.#mesh_color = "black";
         this.#cell_color = "green";
@@ -24,6 +26,7 @@ class Main{
         this.#set(); // set canvas width, height, rows, cols, fill grid
         this.#reset(); // reset everything when resize the window or change the cellsize
         this.#randomGrid(); // when press the random button make a new grid every time it pressed
+        this.#playPause();
     }
 
 
@@ -170,11 +173,31 @@ class Main{
     }
 
 
+    #playPause(){
+        let playBtn = document.getElementById("play");
+        playBtn.addEventListener("click", () => {
+            this.#play = !this.#play;
+
+            // change the innerText and the bgcolor of the play button according to the state
+            if (this.#play) 
+            {
+                playBtn.innerText = "Paused";
+                playBtn.style.backgroundColor = "yellow";
+            }
+            else 
+            {
+                playBtn.innerText = "Play";
+                playBtn.style.backgroundColor = "#04ff04";
+            }
+        })
+    }
+
+
     #animate(timestamp){
         this.ctx.clearRect(0, 0, this.width, this.height); // clear the screen
         this.#drawCells();
         this.#drawMesh();
-        this.#update();
+        if (this.#play) this.#update(); // only update the play attribute is true
         this.#showGeneration();
         requestAnimationFrame(this.#animate.bind(this));
     }
