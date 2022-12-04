@@ -53,6 +53,7 @@ class Main{
         // change the cellsize according to the select tag value
         // then reset all ( reset canvas width, height, rows, cols, grid)
         document.getElementById("cellsize").addEventListener("change", e => {
+            this.#cellsize = e.target.value;
             this.#set();
         })
     }
@@ -66,7 +67,7 @@ class Main{
             let row = [];
             for (let i = 0; i < this.cols; i++)
             {
-                row.push(Math.floor(Math.random() * 2));
+                row.push(Math.floor(Math.random() * 2)); // 0 means die | 1 means live
             }
 
             this.grid.push(row);
@@ -120,10 +121,50 @@ class Main{
     }
 
 
+    #update(){
+        let copy_of_grid = structuredClone(this.grid); // this time we get a deepcopy of the grid, not a reference to the grid( means not a shallow copy )
+
+        // loop though the every cell in the grid
+        for (let j = 0; j < this.rows; j++)
+        {
+            for (let i = 0; i < this.cols; i++)
+            {
+                let currentCell = copy_of_grid[j][i];
+
+                // get the neighbour count
+                let neighbourCount = 0
+                for (let a = -1; a < 2; a++)
+                {
+                    for (let b = -1; b < 2; b++)
+                    {
+                        let x = (this.cols + i + a) % this.cols;
+                        let y = (this.rows + j + b) % this.rows;
+
+                        neighbourCount += copy_of_grid[y][x];
+                    }
+                }
+
+                neighbourCount -= currentCell; // remove the currentCell value from the neighbourCount
+
+                // rules
+                if (currentCell == 1 && (neighbourCount < 2 || neighbourCount > 3)) 
+                {
+                    this.grid[j][i] = 0;
+                }
+                else if (currentCell == 0 && neighbourCount == 3)
+                {
+                    this.grid[j][i] = 1;
+                }
+            }
+        }
+    }
+
+
     #animate(timestamp){
         this.ctx.clearRect(0, 0, this.width, this.height); // clear the screen
         this.#drawCells();
         this.#drawMesh();
+        this.#update();
         requestAnimationFrame(this.#animate.bind(this));
     }
 
