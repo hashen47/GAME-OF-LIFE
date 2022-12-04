@@ -232,7 +232,7 @@ class Main{
     #animate(timestamp){
         this.ctx.clearRect(0, 0, this.width, this.height); // clear the screen
         this.#drawCells();
-        this.#drawMesh();
+        if (this.#cellsize > 2) this.#drawMesh();
         if (this.#play) this.#update(); // only update the play attribute is true
         this.#showGeneration();
         requestAnimationFrame(this.#animate.bind(this));
