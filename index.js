@@ -27,6 +27,7 @@ class Main{
         this.#reset(); // reset everything when resize the window or change the cellsize
         this.#randomGrid(); // when press the random button make a new grid every time it pressed
         this.#playPause();
+        this.#stepUp();
     }
 
 
@@ -170,6 +171,41 @@ class Main{
         }
 
         this.#generation++; // increase generation by one
+    }
+
+
+    #stepUp(){
+        let buttons = document.querySelectorAll(".bottom > button:not(#random, #play)");
+        buttons.forEach(btn => {
+            btn.addEventListener("click", e => {
+                switch(e.target.innerText){
+                    case "1X":
+                        this.#update();
+                        break;
+
+                    case "10X":
+                        for (let i = 0; i < 10; i++)
+                        {
+                            this.#update();
+                        }
+                        break;
+
+                    case "100X":
+                        for (let i = 0; i < 100; i++)
+                        {
+                            this.#update();
+                        }
+                        break;
+
+                    case "1000X":
+                        for (let i = 0; i < 1000; i++)
+                        {
+                            this.#update();
+                        }
+                        break;
+                }
+            })
+        })
     }
 
 
