@@ -3,6 +3,7 @@ class Main{
     #FPS;
     #mesh_color;
     #cell_color;
+    #generation;
 
 
     constructor(){
@@ -11,6 +12,7 @@ class Main{
         this.ctx = this.canvas.getContext("2d");
 
         // grid and cells
+        this.#generation = 0;
         this.#mesh_color = "black";
         this.#cell_color = "green";
         this.grid = [];
@@ -60,6 +62,7 @@ class Main{
 
 
     #fillGrid(){
+        this.#generation = 0; // reset the generation
         this.grid = []; // delete all the cells from the grid
 
         for (let j = 0; j < this.rows; j++)
@@ -79,6 +82,11 @@ class Main{
         document.getElementById("random").addEventListener("click", () => {
             this.#fillGrid();
         })
+    }
+
+
+    #showGeneration(){
+        document.getElementById("generation").value = this.#generation;
     }
 
 
@@ -157,6 +165,8 @@ class Main{
                 }
             }
         }
+
+        this.#generation++; // increase generation by one
     }
 
 
@@ -165,6 +175,7 @@ class Main{
         this.#drawCells();
         this.#drawMesh();
         this.#update();
+        this.#showGeneration();
         requestAnimationFrame(this.#animate.bind(this));
     }
 
