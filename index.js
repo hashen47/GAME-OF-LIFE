@@ -17,7 +17,7 @@ class Main{
         this.#play = false;
         this.#generation = 0;
         this.#mesh_color = "black";
-        this.#cell_color = "green";
+        this.#cell_color = "yellow";
         this.grid = [];
         this.#cellsize = document.getElementById("cellsize").value;
 
@@ -100,9 +100,15 @@ class Main{
 
 
     #drawMesh(){
-        // horizental lines
+        // change mesh color depend on the cellsize and play state
+        if (this.#cellsize >= 10) this.#mesh_color = "gray";
+        if (this.#cellsize < 10) this.#mesh_color = "black";
 
-        this.ctx.strokeStyle = this.#mesh_color;
+        if (!this.#play && this.#cellsize >= 10) this.#mesh_color = "gray";
+        if (this.#play) this.#mesh_color = "black";
+        this.ctx.strokeStyle = this.#mesh_color; // set the ctx strokeStyle
+
+        // horizental lines
         for (let j = 0; j < this.rows + 1; j++)
         {
             this.ctx.beginPath();
