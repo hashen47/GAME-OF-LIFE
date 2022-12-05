@@ -103,12 +103,12 @@ main{
 }
 
 
-.bottom > button:not(#random, #play){
+.bottom > button:not(#random, #clear, #play){
     background-color:#1973ff;
 }
 
 
-.bottom > button:not(#random, #play):hover{
+.bottom > button:not(#random, #clear, #play):hover{
     background-color:#0a51c3;
 }
 
@@ -120,6 +120,16 @@ main{
 
 #random:hover{
     background-color:rgb(213, 2, 2);
+}
+
+
+#clear{
+    background-color:orange;
+}
+
+
+#clear:hover{
+    background-color:rgb(219, 143, 1);
 }
 
 
