@@ -88,11 +88,14 @@ main{
     border:2px solid black;
     font-size:19px;
     box-sizing:border-box;
+    background-color:white;
 }
 
 
 #cellsize{
     width:50px;
+    box-sizing:border-box;
+    padding-left:2px;
 }
 
 
@@ -117,7 +120,7 @@ main{
     padding:8px 10px;
     border-radius:5px;
     border:2px solid black;
-    font-weight:550;
+    font-weight:600;
     text-align:center;
     cursor:pointer;
 }
@@ -166,4 +169,32 @@ main{
 }
 
 
+
 /* styling for mobileview */
+@media (max-width:530px){
+    .top > div:last-child{
+        display:none;
+    }
+
+
+    .top > div{
+        font-size:18px;
+    }
+
+
+    #generation{
+        font-size:14px;
+        width:80px;
+    }
+
+
+    .bottom > button:nth-last-child(2),
+    .bottom > button:nth-last-child(3){
+        display:none;
+    }
+
+
+    .bottom > button{
+        font-size:18px;
+    }
+}
