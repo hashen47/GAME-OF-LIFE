@@ -5,6 +5,7 @@ class Main{
     #cell_color;
     #generation;
     #play;
+    #interval;
 
 
     constructor(){
@@ -21,7 +22,10 @@ class Main{
         this.#cellsize = document.getElementById("cellsize").value;
 
         // about FPS
-        this.#FPS = 30;
+        this.lasttime = 0;
+        this.#FPS = 60;
+        this.#interval = 1000/this.#FPS;
+        this.timer = 0;
 
         this.#set(); // set canvas width, height, rows, cols, fill grid
         this.#reset(); // reset everything when resize the window or change the cellsize
@@ -230,11 +234,20 @@ class Main{
 
 
     #animate(timestamp){
-        this.ctx.clearRect(0, 0, this.width, this.height); // clear the screen
-        this.#drawCells();
-        if (this.#cellsize > 2) this.#drawMesh();
-        if (this.#play) this.#update(); // only update the play attribute is true
-        this.#showGeneration();
+        this.timer += timestamp - this.lasttime;
+        this.lasttime = timestamp;
+
+        if (this.#interval < this.timer)
+        {
+            this.ctx.clearRect(0, 0, this.width, this.height); // clear the screen
+            this.#drawCells();
+            if (this.#cellsize > 2) this.#drawMesh();
+            if (this.#play) this.#update(); // only update the play attribute is true
+            this.#showGeneration();
+
+            this.timer = 0; // reset the timer
+        }
+
         requestAnimationFrame(this.#animate.bind(this));
     }
 
