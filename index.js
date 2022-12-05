@@ -31,9 +31,10 @@ class Main{
         this.#reset(); // reset everything when resize the window or change the cellsize
         this.#randomGrid(); // when press the random button make a new grid every time it pressed
         this.#playPause();
-        this.#stepUp();
-        this.#editCellsWithMouse();
-        this.#clearGrid();
+        this.#stepUp(); 
+        this.#editCellsWithMouse(); // can change cell state with clicking on the cell (0 -> 1, 1 -> 0)
+        this.#clearGrid(); // fill the grid with zeros
+        this.#changeMeshColor(); // change the meshcolor between black and gray according to the #mesh checkbox checked value
     }
 
 
@@ -249,6 +250,14 @@ class Main{
                 playBtn.innerText = "Play";
                 playBtn.style.backgroundColor = "#04ff04";
             }
+        })
+    }
+
+
+    #changeMeshColor(){
+        document.getElementById("mesh").addEventListener("change", e => {
+            if (e.target.checked) this.#mesh_color = "gray";
+            else this.#mesh_color = "black";
         })
     }
 
