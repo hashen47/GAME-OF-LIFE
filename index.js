@@ -33,6 +33,7 @@ class Main{
         this.#playPause();
         this.#stepUp();
         this.#editCellsWithMouse();
+        this.#clearGrid();
     }
 
 
@@ -91,6 +92,13 @@ class Main{
     #randomGrid(){
         document.getElementById("random").addEventListener("click", () => {
             this.#fillGrid();
+        })
+    }
+
+
+    #clearGrid(){
+        document.getElementById("clear").addEventListener("click", () => {
+            this.#fillGrid(false);
         })
     }
 
