@@ -32,6 +32,7 @@ class Main{
         this.#randomGrid(); // when press the random button make a new grid every time it pressed
         this.#playPause();
         this.#stepUp();
+        this.#editCellsWithMouse();
     }
 
 
@@ -175,6 +176,16 @@ class Main{
         }
 
         this.#generation++; // increase generation by one
+    }
+
+
+    #editCellsWithMouse(){
+        this.canvas.addEventListener("click", e => {
+            let i = Math.floor(e.offsetX / this.#cellsize);
+            let j = Math.floor(e.offsetY / this.#cellsize);
+
+            this.grid[j][i] = (this.grid[j][i] == 1) ? 0 : 1; // change the cell state
+        })
     }
 
 
