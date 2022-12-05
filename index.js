@@ -70,7 +70,7 @@ class Main{
     }
 
 
-    #fillGrid(){
+    #fillGrid(rand=true){
         this.#generation = 0; // reset the generation
         this.grid = []; // delete all the cells from the grid
 
@@ -79,7 +79,8 @@ class Main{
             let row = [];
             for (let i = 0; i < this.cols; i++)
             {
-                row.push(Math.floor(Math.random() * 2)); // 0 means die | 1 means live
+                if (rand) row.push(Math.floor(Math.random() * 2)); // 0 means die | 1 means live
+                else row.push(0); 
             }
 
             this.grid.push(row);
@@ -100,15 +101,9 @@ class Main{
 
 
     #drawMesh(){
-        // change mesh color depend on the cellsize and play state
-        if (this.#cellsize >= 10) this.#mesh_color = "gray";
-        if (this.#cellsize < 10) this.#mesh_color = "black";
-
-        if (!this.#play && this.#cellsize >= 10) this.#mesh_color = "gray";
-        if (this.#play) this.#mesh_color = "black";
-        this.ctx.strokeStyle = this.#mesh_color; // set the ctx strokeStyle
-
         // horizental lines
+
+        this.ctx.strokeStyle = this.#mesh_color;
         for (let j = 0; j < this.rows + 1; j++)
         {
             this.ctx.beginPath();
